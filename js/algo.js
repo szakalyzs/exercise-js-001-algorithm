@@ -19,9 +19,9 @@ function randElement(kindOfData) {
 
 function fillArray(arr, kindOfData) {
     if (kindOfData == 'mixed') {
-        const mix = ['int','float','char'];
+        const mix = ['int', 'float', 'char'];
         for (let i = 0; i < 10; i += 1) {
-            arr.push(randElement( mix[Math.floor(Math.random() * 3)]));
+            arr.push(randElement(mix[Math.floor(Math.random() * 3)]));
         }
     } else {
         for (let i = 0; i < 10; i += 1) {
@@ -176,29 +176,80 @@ function logSearch(arr, reqNum) {
     bubbleSort(arr);
     let start = 0;
     let end = arr.length - 1;
-    do {
-        mid = Math.floor((end + start) / 2);
-        if (reqNum < mid) {
-            end = mid;
-        } else
-            if (reqNum > mid) {
-                start = mid;
+    while (start <= end) {
+        let mid = Math.floor((start + end) / 2);
+        if (reqNum == arr[mid]) {
+            return true;
+        } else {
+            if (reqNum > arr[mid]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
             }
-    } while (reqNum = mid);
+        }
+    }
+    return false;
 }
 console.log(intArray);
-console.log('9. Array contains the number ' + 23 + ': ' + linearSearch(intArray, 23));
+console.log('9. Array contains the number ' + 23 + ': ' + logSearch(intArray, 23));
 
 /*
 10. Írd ki, hogy egy tetszőlegese elemszámú, bármilyen típusú elemeket tartalmazó tömb (feltételezzük, hogy beágyazott tömböt, objektumot nem tartalmaz) hányszor tartalmazza a 23-as számot!
+*/
+function countOfNumber(arr, reqNum) {
+    let numCount = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === reqNum) {
+            numCount += 1;
+        }
+    }
+    return numCount;
+}
+console.log(mixedArray);
+console.log('10. Count of number ' + 23 + ' = ' + countOfNumber(mixedArray, 23));
 
-11. Rendezd a javított buborékos rendezés algoritmus (nézz utána mi az, ha nem ismered) segítségével egy tetszőleges elemszámú, csak lebegőpontos számokat tartalmazó tömb elemeit növekvő sorrendbe! Írasd ki a rendezett tömböt!
-
+/*
 12. Rendezd a javított buborékos rendezés algoritmus (nézz utána mi az, ha nem ismered) segítségével egy tetszőleges elemszámú, beágyazott tömb, és objektum kivételével bármilyen típusú elemeket tartalmazó tömb elemeit csökkenő sorrendbe! A nem szám típusú elemeket rakd a tömb végére az eredeti sorrendbe. Írasd ki a rendezett tömböt!
+*/
+function sortMixedArray(arr) {
+    const numsArr = [];
+    const othersArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === 'number') {
+            numsArr.push(arr[i]);
+        } else {
+            othersArr.push(arr[i]);
+        }
+    }
+    arr = [];
+    bubbleSort(numsArr);
+    arr = numsArr.concat(othersArr);
+    return arr;
+}
+console.log('12. Sorted mixed array = ' + sortMixedArray(mixedArray));
 
+/*
 13. Adott egy tetszőleges elemszámú, csak egész számokat tartalmazó tömb. A tömb elemeit rendezzük növekvő sorrendbe. Ezután a felhasználótól kérjünk be egy számot (addig kérjünk be értéket, míg valóban egy véges egész számot ad meg). A számot szúrjuk be a tömbbe úgy, hogy a tömb továbbra is rendezett maradjon, tehát a megfelelő indexű helyre kerüljön be a plusz elem.
 Írasd ki a rendezett tömböt!
+*/
+function insertToArray(arr, num) {
+    bubbleSort(arr);
+    var num = Math.floor(Math.random() * 100);
+    while (!Number.isInteger(num)) {
+        num = Math.floor(Math.random() * 100);
+    } 
+    console.log(num);
+    let i = 1;
+    while (arr[i] < num) {
+        i += 1;
+    }
+    arr.splice(i, 0, num);
+    return arr;
+}
+console.log(intArray);
+console.log('13. Array with inserted item = ' + insertToArray(intArray));
 
+/*
 14. Adott egy tömb, mely azonos darabú egész számot, és szöveget tartalmaz véletlenszerű sorrendben. Rendezzük úgy a tömböt, hogy minden szám után egy string következzen! Írasd ki a rendezett tömböt!
 
 15. Adott egy tetszőleges pozitív egész számokat tartalmazó tömb. Válogassuk szét külön egy even (páros), és odd (páratlan) nevezetű tömbbe a páros, és páratlan számokat! Írjuk ki a 2 tömböt!
