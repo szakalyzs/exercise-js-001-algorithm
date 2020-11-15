@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /*
 0. Tömbök feltöltése véletlenszerűen:
@@ -366,8 +366,14 @@ function union(arr1, arr2) {
     return unionArr;
 }
 
-function descartesProduct(arr1, arr2) {
-    
+function descartes(arr1, arr2) {
+    const descartesArr= [];
+    for (let i = 0; i< 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            descartesArr.push('('+[arr1[i],arr2[j]]+')');   
+        }
+    }
+    return descartesArr;
 }
 
 console.log('\n'); 
@@ -378,4 +384,5 @@ fillArray(array2, 'int');
 console.log(array2);
 console.log('16. Intersection of arrays above = ' + intersection(array, array2));
 console.log('    Symmetric difference of arrays above = ' + symmetricDifference(array, array2));
-console.log('    Union of arrays above = ' + union(array, array2) + '    (intersect. + symm. diff.)');
+console.log('    Union of arrays above = ' + union(array, array2) + '   (intersect. + symm. diff.)');
+console.log('    Descartes of arrays above = ' + descartes(array, array2));
