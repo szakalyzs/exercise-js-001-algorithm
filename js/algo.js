@@ -5,6 +5,7 @@
 */
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const mix = ['int', 'char', 'float'];
+const array = [];
 
 function randElement(kindOfData) {
     switch (kindOfData) {
@@ -49,14 +50,6 @@ function fillSpecMixedArray(arr) {
     return arr;   
 }
 
-
-const array = [];
-
-/*const floatArray = [];
-fillArray(floatArray, 'float');
-const mixedArray = fillArray('mixed');
-const specMixedArray = fillSpecMixedArray();
-*/
 /*
 1. Írasd ki egy tetszőleges elemszámú, csak egész számokat tartalmazó tömb legkisebb elemét!
 */
@@ -385,4 +378,4 @@ console.log(array2);
 console.log('16. Intersection of arrays above = ' + intersection(array, array2));
 console.log('    Symmetric difference of arrays above = ' + symmetricDifference(array, array2));
 console.log('    Union of arrays above = ' + union(array, array2) + '   (intersect. + symm. diff.)');
-console.log('    Descartes of arrays above = ' + descartes(array, array2));
+console.log('    Cartesian product of arrays above = ' + descartes(array, array2));
